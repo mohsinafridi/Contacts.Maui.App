@@ -1,0 +1,94 @@
+<?xml version   ="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Contacts.Maui.Views.ContactsPage"
+             Title="Contacts">
+
+    <Grid
+        Padding="5"
+        RowDefinitions="*, 50"
+        ColumnDefinitions="*">
+
+
+        <ListView
+           Grid.Row="0"
+           Grid.Column="0"
+           x:Name="listContacts"
+           BackgroundColor="Transparent"
+           SeparatorColor="Silver"
+           RowHeight="65"
+           ItemSelected="listContacts_ItemSelected" 
+           ItemTapped="listContacts_ItemTapped">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell 
+                    Text="{Binding Name}" 
+                    Detail="{Binding Email}">
+                        <TextCell.ContextActions>
+                            <MenuItem Text="Delete" 
+                                      IsDestructive="True"
+                                      Clicked="Delete_Clicked"
+                                      CommandParameter="{Binding .}"></MenuItem>
+                            <MenuItem Text="Edit"></MenuItem>
+                        </TextCell.ContextActions>
+                    </TextCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+        <VerticalStackLayout 
+          Padding="10,20,20,12"    
+            HeightRequest="170" 
+            Spacing="1"
+           >
+
+            <Button 
+             x:Name="btnPrint" 
+             Text="Print" 
+             Clicked="btnPrint_Clicked">
+            </Button>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout 
+            HeightRequest="70" 
+             Spacing="5"
+             Padding="10,20,20,20">
+            
+            <Button x:Name="btnAdd" 
+                 Text="Add" 
+                Clicked="btnAdd_Clicked">
+            </Button>
+        </VerticalStackLayout>
+
+
+
+    </Grid>
+
+
+    <!--Without Control-->
+    <!--<ListView x:Name="listContacts" 
+              ItemSelected="listContacts_ItemSelected" 
+              ItemTapped="listContacts_ItemTapped"
+               BackgroundColor="Transparent"
+              
+              SeparatorColor="Silver"
+              RowHeight="65"
+              >
+
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell 
+                    Text="{Binding Name}" 
+                    Detail="{Binding Email}">
+                </TextCell>
+
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>-->
+
+</ContentPage>
