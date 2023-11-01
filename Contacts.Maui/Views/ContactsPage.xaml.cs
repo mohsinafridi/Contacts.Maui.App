@@ -1,4 +1,5 @@
 using Contacts.Maui.Models;
+using Contacts.Maui.Views.Department;
 using System.Collections.ObjectModel;
 using Contact = Contacts.Maui.Models.Contact;
 
@@ -38,6 +39,7 @@ public partial class ContactsPage : ContentPage
     private void btnPrint_Clicked(object sender, EventArgs e)
     {
         // Print All Contacts
+        Shell.Current.GoToAsync(nameof(AddDepartmentPage));
     }
 
     private void btnAdd_Clicked(object sender, EventArgs e)

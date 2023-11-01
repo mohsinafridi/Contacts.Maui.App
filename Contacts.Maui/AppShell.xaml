@@ -5,11 +5,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Contacts.Maui"
     xmlns:contact="clr-namespace:Contacts.Maui.Views"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:department="clr-namespace:Contacts.Maui.Views.Department"
+    Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate contact:ContactsPage}"
         Route="ContactsPage" />
+
+    <ShellContent
+    Title="Home"
+    ContentTemplate="{DataTemplate department:DepartmentsPage}"
+    Route="DepartmentsPage" />
 
 </Shell>
