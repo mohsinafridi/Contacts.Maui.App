@@ -2,8 +2,57 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Contacts.Maui.Views.Department.DepartmentsPage"
-             Title="DepartmentsPage">
-    <CollectionView x:Name="CvDepartments"
+             Title="Departments">
+
+    <Grid
+     Padding="5"
+     RowDefinitions="*, 50"
+     ColumnDefinitions="*">
+
+        <ListView
+        Grid.Row="0"
+        Grid.Column="0"
+        x:Name="listDepartments"
+        BackgroundColor="Transparent"
+        SeparatorColor="Silver"
+        RowHeight="65"
+        ItemSelected="listDepartments_ItemSelected" 
+        ItemTapped="listDepartments_ItemTapped">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell 
+                 Text="{Binding Name}" 
+                 >
+                        <TextCell.ContextActions>
+                            <MenuItem Text="Delete" 
+                                   IsDestructive="True"
+                                   Clicked="Delete_Clicked"
+                                   CommandParameter="{Binding .}"></MenuItem>
+                        </TextCell.ContextActions>
+                    </TextCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+
+
+
+        <VerticalStackLayout 
+     HeightRequest="70" 
+      Spacing="5"
+      Padding="10,20,20,20">
+            <Button x:Name="btnAdd" 
+        Text="Add" 
+        Clicked="btnAdd_Clicked">
+            </Button>
+        </VerticalStackLayout>
+
+    </Grid>
+
+    <!--<CollectionView x:Name="CvDepartments"
                Margin="10"
                SelectionMode="Single"
                  SelectionChanged="CvDepartments_SelectionChanged"
@@ -37,5 +86,5 @@
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
-    </CollectionView>
+    </CollectionView>-->
 </ContentPage>

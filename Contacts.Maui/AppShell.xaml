@@ -4,18 +4,62 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Contacts.Maui"
+    xmlns:home ="clr-namespace:Contacts.Maui.Views"
     xmlns:contact="clr-namespace:Contacts.Maui.Views"
     xmlns:department="clr-namespace:Contacts.Maui.Views.Department"
     Shell.FlyoutBehavior="Flyout">
 
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid
+                x:Name="Header"
+                Margin="0"
+                Padding="20"
+                BackgroundColor="{StaticResource White}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image
+                    x:Name="Logo"
+                    Grid.Row="0"
+                    Margin="0"
+                    Source="dotnet_bot.svg"/>
+                <Label
+                    x:Name="AppName"
+                    Grid.Row="1"
+                    Margin="0"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="End"
+                    Text="Contact App"
+                    TextColor="{StaticResource NavigationBar}"/>
+
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+
     <ShellContent
-        Title="Home"
+    Title="Home"
+    ContentTemplate="{DataTemplate home:HomePage}"
+    Route="HomePage" />
+
+
+    <ShellContent
+        Title="Contacts"
         ContentTemplate="{DataTemplate contact:ContactsPage}"
         Route="ContactsPage" />
 
     <ShellContent
-    Title="Home"
+    Title="Departments"
     ContentTemplate="{DataTemplate department:DepartmentsPage}"
     Route="DepartmentsPage" />
+
+    <ShellContent
+   Title="Logout"
+   ContentTemplate="{DataTemplate department:DepartmentsPage}"
+   Route="DepartmentsPage" />
 
 </Shell>

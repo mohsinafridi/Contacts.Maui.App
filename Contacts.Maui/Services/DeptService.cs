@@ -40,5 +40,15 @@ namespace Contacts.Maui.Services
 
             return JsonConvert.DeserializeObject<Department>(response);
         }
+
+        public static async Task<Department> DeleteDepartment(int deptId)
+        {
+
+            var httpClient = new HttpClient();
+
+             await httpClient.DeleteAsync(AppSettings.ApiUrl + "api/department/" + deptId);
+
+            return JsonConvert.DeserializeObject<Department>("");
+        }
     }
 }

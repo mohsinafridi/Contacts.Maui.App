@@ -4,31 +4,51 @@ namespace Contacts.Maui.Views.Department;
 
 public partial class DepartmentsPage : ContentPage
 {
-	public DepartmentsPage()
-	{
-		InitializeComponent();
-       
-        LoadDepartmentsAsync();  // get fresh copy to list
-    }
-
-
-    private void CvDepartments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    public DepartmentsPage()
     {
-        var currentSelection = e.CurrentSelection.FirstOrDefault() as Contacts.Maui.Models.Department;
+        InitializeComponent();
 
-        if (currentSelection == null) return;
-
-        //   Navigation.PushModalAsync(new DepartmentDetailView(currentSelection.Id));
-
-        ((CollectionView)sender).SelectedItem = null;
+        LoadDepartments();  // get fresh copy to list
     }
 
-    private async void LoadDepartmentsAsync()
+
+    private void listDepartments_ItemSelected(object sender, SelectionChangedEventArgs e)
+    {
+        if (listDepartments.SelectedItem != null)
+        {
+            Shell.Current.GoToAsync($"{nameof(EditDepartmentPage)}?Id={((Models.Department)listDepartments.SelectedItem).Id}");
+        }
+
+
+    }
+    private void listDepartments_ItemTapped(object sender, SelectionChangedEventArgs e)
+    {
+        listDepartments.SelectedItem = null;
+    }
+
+
+    private async void LoadDepartments()
     {
         var departments = await DeptService.GetDepartments();
         if (departments.Any())
-            CvDepartments.ItemsSource = departments;
+            listDepartments.ItemsSource = departments.Take(5)
+                             .OrderByDescending(x => x.Id)
+                             .ToList();
     }
 
+    private async void Delete_Clicked(object sender, EventArgs e)
+    {
+        var menuItem = sender as MenuItem;
+        var department = menuItem.CommandParameter as Models.Department;
 
+        // delete
+        await DeptService.DeleteDepartment(department.Id);
+
+        LoadDepartments();
+    }
+
+    private void btnAdd_Clicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync(nameof(AddDepartmentPage));
+    }
 }
