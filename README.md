@@ -1,4 +1,4 @@
-# Contacts
+# Contacts App
 A small Contact application using MAUI in .NET 7.
 App will add/update/delete/read contact information.
 For now,I have added in memory data.
