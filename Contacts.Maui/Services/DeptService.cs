@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Contacts.Maui.Services
 {
-    public class DeptService
+    public  class DeptService
     {
         public static async Task<bool> CreateDepartment(Department department)
         {

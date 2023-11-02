@@ -57,9 +57,10 @@
     ContentTemplate="{DataTemplate department:DepartmentsPage}"
     Route="DepartmentsPage" />
 
+
     <ShellContent
-   Title="Logout"
-   ContentTemplate="{DataTemplate department:DepartmentsPage}"
-   Route="DepartmentsPage" />
+    Title="Create Department VM"
+    ContentTemplate="{DataTemplate department:CreateDepartmentPage}"
+    Route="CreateDepartmentPage" />
 
 </Shell>

@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Maui;
+using Contacts.Maui.ViewModel;
+using Contacts.Maui.Views.Department;
 using Microsoft.Extensions.Logging;
 
 namespace Contacts.Maui
@@ -20,6 +22,12 @@ namespace Contacts.Maui
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+
+            // Add ViewModels
+            builder.Services.AddTransient<AddDepartmentViewModel>();
+
+            // Add Views
+            builder.Services.AddTransient<CreateDepartmentPage>();
 
             return builder.Build();
         }
