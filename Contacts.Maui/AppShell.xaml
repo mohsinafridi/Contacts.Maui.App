@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:Contacts.Maui"
     xmlns:home ="clr-namespace:Contacts.Maui.Views"
     xmlns:contact="clr-namespace:Contacts.Maui.Views"
+    xmlns:start="clr-namespace:Contacts.Maui.Views.Home"
     xmlns:department="clr-namespace:Contacts.Maui.Views.Department"
     Shell.FlyoutBehavior="Flyout">
 
@@ -43,8 +44,8 @@
 
     <ShellContent
     Title="Home"
-    ContentTemplate="{DataTemplate home:HomePage}"
-    Route="HomePage" />
+    ContentTemplate="{DataTemplate start:StartPage}"
+    Route="StartPage" />
 
 
     <ShellContent
