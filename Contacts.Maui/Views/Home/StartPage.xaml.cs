@@ -1,4 +1,7 @@
 
+using Contacts.Maui.Models;
+using Contacts.Maui.Services;
+using Contacts.Maui.Views.Department;
 using System.Data.SqlClient;
 
 namespace Contacts.Maui.Views.Home;
@@ -10,50 +13,59 @@ public partial class StartPage : ContentPage
         InitializeComponent();
     }
 
-    private void btnCreateConnection_Clicked(object sender, EventArgs e)
+    private async void BtnCreateConnection_Clicked(object sender, EventArgs e)
     {
 
-        // Ado .net code for creating connection and 
+        // Check if local is working with Android Build.
 
-        string DataSource = EntDataSource.Text;
-        string DataBaseName = EntDatabase.Text;
-        string username = "";
-        string password = "";
-        // Connection
-        string ConnectionString = $"Data Source={DataSource};Initial Catalog={DataBaseName};" +
-            $"User Id={username};Password={password}";
-        //Integrated Security=SSPI;";
-        using (SqlConnection connection = new SqlConnection(ConnectionString))
+        string ServerName = EntDataSource.Text;
+        string DatabaseName = EntDatabase.Text;
+        string UserName = EntUsername.Text;
+        //string Password = EntPassword.Text;
+
+        if (string.IsNullOrEmpty(ServerName))
         {
-            connection.Open();
-            
-            string sql = "SELECT * FROM Departments WHERE Column = @value";
+            await DisplayAlert("", "Servername is required", "Cancel");
+            return;
+        }
+        if (string.IsNullOrEmpty(DatabaseName))
+        {
+            await DisplayAlert("", "Database Name is required", "Cancel"); return;
+        }
+        if (string.IsNullOrEmpty(UserName))
+        {
+            await DisplayAlert("", "Username is required", "Cancel"); return;
+        }
+        //if (string.IsNullOrEmpty(Password))
+        //{
+        //    await DisplayAlert("", "Username is required", "Cancel"); return;
+        //}
 
-            SqlCommand command = new SqlCommand(sql, connection);
+        var obj = new ConnectionModel
+        {
+            ServerName =ServerName,
+            Catalog = DatabaseName,
+            Username = UserName,
+            Password = ""
+        };
 
-            SqlDataReader reader = command.ExecuteReader();
-
-            // Call Read before accessing data.
-            while (reader.Read())
-            {
-                Console.WriteLine(String.Format("{0}, {1}", reader[0], reader[1]));
-            }
-
-            //*
-//             * SQL5109.site4now.net
-
-//username : db_aa0b62_realestatedb_admin
-//password : Learning@7788
-//             * *
-             //
-            // Call Close when done reading.
-            reader.Close();
+        // call connection api for 
+        // http://localhost:5218/ConnectionBuild
+        var response = await ApiService.CreateConnection(obj);
+        if (response)
+        {
+            await DisplayAlert("", "Connection Created Successfully", "Ok");
+            await Navigation.PushModalAsync(new AddDepartmentPage());
+        }
+        else
+        {
+            await DisplayAlert("", "Error occur in creating connection", "Cancel");
         }
 
     }
 
-    private void btnCancel_Clicked(object sender, EventArgs e)
-    {
+private void BtnCancel_Clicked(object sender, EventArgs e)
+{
 
-    }
+}
 }

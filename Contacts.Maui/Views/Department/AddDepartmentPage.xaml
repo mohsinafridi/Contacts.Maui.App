@@ -25,8 +25,8 @@
             </HorizontalStackLayout>
         </Frame>
 
-        <Button x:Name="btnSave" Text="Save" Clicked="btnSave_Clicked"></Button>
-        <Button x:Name="btnCancel" Text="Cancel" Clicked="btnCancel_Clicked"></Button>
+        <Button x:Name="BtnSave" Text="Save" Clicked="BtnSave_Clicked"></Button>
+        <Button x:Name="btnCancel" Text="Cancel" Clicked="BtnCancel_Clicked"></Button>
         
     </VerticalStackLayout>
 

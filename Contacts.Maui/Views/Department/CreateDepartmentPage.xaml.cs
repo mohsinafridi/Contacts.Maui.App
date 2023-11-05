@@ -8,7 +8,6 @@ public partial class CreateDepartmentPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = addDepartmentviewModel;
-
     }
 
    

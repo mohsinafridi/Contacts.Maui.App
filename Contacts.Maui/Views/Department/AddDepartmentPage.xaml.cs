@@ -9,11 +9,12 @@ public partial class AddDepartmentPage : ContentPage
 		InitializeComponent();
 	}
 
-    private async void btnSave_Clicked(object sender, EventArgs e)
+    private async void BtnSave_Clicked(object sender, EventArgs e)
     {
         if (string.IsNullOrEmpty(EntDeptName.Text))
         {
             await DisplayAlert("", "Name is required", "Cancel");
+            return;
         }
 
         var dept = new Models.Department
@@ -22,7 +23,7 @@ public partial class AddDepartmentPage : ContentPage
         };
 
 
-        var response = await DeptService.CreateDepartment(dept);
+        var response = await DeptService.CreateDepartmentLocally(dept);
         if (response)
         {
             await DisplayAlert("", "Department has been created", "Ok");
@@ -34,7 +35,7 @@ public partial class AddDepartmentPage : ContentPage
         }
     }
 
-    private void btnCancel_Clicked(object sender, EventArgs e)
+    private void BtnCancel_Clicked(object sender, EventArgs e)
     {
 
     }

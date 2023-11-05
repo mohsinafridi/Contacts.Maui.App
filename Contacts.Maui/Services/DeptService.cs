@@ -10,6 +10,20 @@ namespace Contacts.Maui.Services
 {
     public  class DeptService
     {
+
+
+        public static async Task<bool> CreateDepartmentLocally(Department department)
+        {
+
+            var httpClient = new HttpClient();
+            var json = JsonConvert.SerializeObject(department);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync(AppSettings.localApiUrl + "CreateDepartment", content);
+            if (!response.IsSuccessStatusCode) return false;
+            return true;
+        }
+
+
         public static async Task<bool> CreateDepartment(Department department)
         {
 
@@ -26,7 +40,7 @@ namespace Contacts.Maui.Services
 
             var httpClient = new HttpClient();
 
-            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/department");
+            var response = await httpClient.GetStringAsync(AppSettings.localApiUrl + "Departments");
 
             return JsonConvert.DeserializeObject<List<Department>>(response);
         }
