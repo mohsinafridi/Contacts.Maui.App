@@ -1,18 +1,21 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Contacts.Maui.Database;
 using Contacts.Maui.Models;
-using Contacts.Maui.Services;
+using Contacts.Maui.Views.Department;
 
 namespace Contacts.Maui.ViewModel
 {
     public partial class AddDepartmentViewModel : ObservableObject
     {
+        private readonly AppDbContext _context;
+
         [ObservableProperty]
         private string _name;
 
-        public AddDepartmentViewModel()
+        public AddDepartmentViewModel(AppDbContext context)
         {
-            
+            _context = context;
         }
 
         [RelayCommand]
@@ -26,12 +29,13 @@ namespace Contacts.Maui.ViewModel
                     {
                         Name = Name,
                     };
-                    var response =  await DeptService.CreateDepartment(department);
+                    //  var response =  await DeptService.CreateDepartment(department); // OLd way without MVVM
 
-                    if (response)
+                    var response = await _context.CreateAsync(department);
+                    if (response > 0)
                     {
                         await Shell.Current.DisplayAlert("Department Added", "Department Added Successfully", "OK");
-                        await Shell.Current.GoToAsync("..");
+                        await Shell.Current.GoToAsync(nameof(DepartmentsPage));
                     }
                 }
                 else
@@ -42,7 +46,7 @@ namespace Contacts.Maui.ViewModel
             catch (Exception ex)
             {
                 await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
-            }           
+            }
         }
     }
 }

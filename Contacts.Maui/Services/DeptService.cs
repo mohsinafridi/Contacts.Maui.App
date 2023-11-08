@@ -40,7 +40,7 @@ namespace Contacts.Maui.Services
 
             var httpClient = new HttpClient();
 
-            var response = await httpClient.GetStringAsync(AppSettings.localApiUrl + "Departments");
+            var response = await httpClient.GetStringAsync("http://mohsinazam-001-site1.btempurl.com/api/department");
 
             return JsonConvert.DeserializeObject<List<Department>>(response);
         }

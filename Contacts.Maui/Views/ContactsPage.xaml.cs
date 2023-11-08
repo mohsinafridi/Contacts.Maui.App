@@ -39,7 +39,7 @@ public partial class ContactsPage : ContentPage
     private void btnPrint_Clicked(object sender, EventArgs e)
     {
         // Print All Contacts
-        Shell.Current.GoToAsync(nameof(AddDepartmentPage));
+        Shell.Current.GoToAsync(nameof(CreateDepartmentPage));
     }
 
     private void btnAdd_Clicked(object sender, EventArgs e)

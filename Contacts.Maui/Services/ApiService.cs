@@ -25,5 +25,14 @@ namespace Contacts.Maui.Services
             if (!response.IsSuccessStatusCode) return false;
             return true;
         }
+
+        public static async Task<string> Test()
+        {
+            var httpClient = new HttpClient();
+
+            var response = await httpClient.GetStringAsync("http://172.21.112.1/test");
+
+            return response;
+        }
     }
 }

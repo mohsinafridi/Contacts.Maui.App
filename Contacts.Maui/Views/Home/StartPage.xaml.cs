@@ -11,8 +11,16 @@ public partial class StartPage : ContentPage
     public StartPage()
     {
         InitializeComponent();
+       // Testc();
     }
 
+
+    private async void Testc()
+    {
+        var response = await ApiService.Test();
+        if (!string.IsNullOrEmpty(response))
+            lblResponse.Text = response;
+    }
     private async void BtnCreateConnection_Clicked(object sender, EventArgs e)
     {
 
@@ -43,7 +51,7 @@ public partial class StartPage : ContentPage
 
         var obj = new ConnectionModel
         {
-            ServerName =ServerName,
+            ServerName = ServerName,
             Catalog = DatabaseName,
             Username = UserName,
             Password = ""
@@ -51,11 +59,12 @@ public partial class StartPage : ContentPage
 
         // call connection api for 
         // http://localhost:5218/ConnectionBuild
+        // http://172.21.112.1/
         var response = await ApiService.CreateConnection(obj);
         if (response)
         {
-            await DisplayAlert("", "Connection Created Successfully", "Ok");
-            await Navigation.PushModalAsync(new AddDepartmentPage());
+            await DisplayAlert("", "Connection Created Successfully", "Ok");            
+            await Shell.Current.GoToAsync(nameof(AddContactPage));
         }
         else
         {

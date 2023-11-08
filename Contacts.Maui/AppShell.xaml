@@ -21,11 +21,13 @@
                     <RowDefinition Height="100"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+               
                 <Image
                     x:Name="Logo"
                     Grid.Row="0"
                     Margin="0"
                     Source="dotnet_bot.svg"/>
+                
                 <Label
                     x:Name="AppName"
                     Grid.Row="1"
@@ -42,26 +44,37 @@
     </Shell.FlyoutHeaderTemplate>
 
 
-    <ShellContent
+    <!--<ShellContent
     Title="Home"
     ContentTemplate="{DataTemplate start:StartPage}"
-    Route="StartPage" />
+    Route="StartPage" />-->
 
+    <ShellContent
+  Title="Departments"
+  ContentTemplate="{DataTemplate department:DepartmentsPage}"
+  Route="DepartmentsPage" />
 
     <ShellContent
         Title="Contacts"
         ContentTemplate="{DataTemplate contact:ContactsPage}"
         Route="ContactsPage" />
 
-    <ShellContent
-    Title="Departments"
-    ContentTemplate="{DataTemplate department:DepartmentsPage}"
-    Route="DepartmentsPage" />
 
 
-    <ShellContent
-    Title="Create Department VM"
-    ContentTemplate="{DataTemplate department:CreateDepartmentPage}"
-    Route="CreateDepartmentPage" />
 
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <Label
+                x:Name="AppName"
+                Grid.Row="1"
+                Margin="0"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="End"
+                Text="@ContactApp Team"
+                TextColor="{StaticResource NavigationBar}"/>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+    
 </Shell>

@@ -1,4 +1,6 @@
-﻿namespace Contacts.Maui
+﻿using Contacts.Maui.Database;
+
+namespace Contacts.Maui
 {
     public partial class App : Application
     {
@@ -8,5 +10,6 @@
 
             MainPage = new AppShell();
         }
+        public static AppDbContext Database { get; private set; }
     }
 }

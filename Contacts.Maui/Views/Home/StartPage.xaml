@@ -83,6 +83,10 @@
 
         <Button x:Name="BtnCreateConnection" Text="Create Connection" Clicked="BtnCreateConnection_Clicked"></Button>
         <Button x:Name="BtnCancel" Text="Cancel" Clicked="BtnCancel_Clicked"></Button>
+
+        <Label x:Name="lblResponse" FontSize="Medium">
+            
+        </Label>
         
     </VerticalStackLayout>
 

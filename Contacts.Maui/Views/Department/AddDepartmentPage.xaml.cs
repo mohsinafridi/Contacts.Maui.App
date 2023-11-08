@@ -27,7 +27,7 @@ public partial class AddDepartmentPage : ContentPage
         if (response)
         {
             await DisplayAlert("", "Department has been created", "Ok");
-            await Navigation.PushModalAsync(new DepartmentsPage());
+           // await Navigation.PushModalAsync(new DepartmentsPage());
         }
         else
         {
