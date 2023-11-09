@@ -10,6 +10,7 @@
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
 
 		<!-- Display name -->
 		<ApplicationTitle>Contacts.Maui</ApplicationTitle>
@@ -58,6 +59,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="ViewModel\AddDepartmentViewModel.cs" />
+	  <Compile Remove="ViewModel\DepartmentViewModels\GetDepartmentsViewModel.cs" />
 	  <Compile Remove="Views\Department\AddDepartmentPage.xaml.cs" />
 	</ItemGroup>
 
@@ -71,10 +74,10 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="SQLite" Version="3.13.0" />
-		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
 		
-		<!--NEW -->		
+		<!--NEW -->
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 		<PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
 		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.0-pre20220207221914" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.0-pre20220207221914" />

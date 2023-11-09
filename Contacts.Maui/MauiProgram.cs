@@ -28,8 +28,10 @@ namespace Contacts.Maui
             builder.Services.AddSingleton<AppDbContext>();
 
             // Add ViewModels
-            builder.Services.AddTransient<AddDepartmentViewModel>();
-            builder.Services.AddSingleton<GetDepartmentsViewModel>();
+            builder.Services.AddTransient<DepartmentViewModel>();
+
+            //builder.Services.AddTransient<AddDepartmentViewModel>();
+            //builder.Services.AddSingleton<GetDepartmentsViewModel>();
 
             // Add Views
             builder.Services.AddTransient<CreateDepartmentPage>();

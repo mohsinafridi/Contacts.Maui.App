@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodel ="clr-namespace:Contacts.Maui.ViewModel"
+             xmlns:viewmodel ="clr-namespace:Contacts.Maui.ViewModel.DepartmentViewModels"
+             xmlns:models ="clr-namespace:Contacts.Maui.Models"
              x:Class="Contacts.Maui.Views.Department.CreateDepartmentPage"
              Title="Create Department"
-             x:DataType="viewmodel:AddDepartmentViewModel"
+             x:DataType="viewmodel:DepartmentViewModel"
              >
 
     <VerticalStackLayout Spacing="10" Margin="25,10,20,10">
@@ -13,15 +14,24 @@
             <HorizontalStackLayout>
                 <Label Text="Name" VerticalOptions="Center" WidthRequest="60"></Label>
                 <Entry x:Name="EntDeptName" 
-                       Text="{Binding Name}"
+                       Text="{Binding OperatingDepartment.Name}"
                        VerticalOptions="Center"></Entry>
             </HorizontalStackLayout>
         </Frame>
 
         <Button x:Name="btnCreate" 
-                Command="{Binding AddDepartmentCommand}"
-                Text="Create Department">
-                
+                Command="{Binding SaveDepartmentCommand}"
+                Text="Create Department"                
+                >
+            <!--<Button.Triggers>
+                <DataTrigger TargetType="Button" 
+                             Binding="{Binding OperatingDepartment.Id}"
+                             Value="0">
+                    <Setter Property="Text" Value="Create Department"/>
+                    
+                </DataTrigger>
+            </Button.Triggers>-->
+
         </Button>
 
     </VerticalStackLayout>

@@ -1,13 +1,13 @@
-using Contacts.Maui.ViewModel;
+using Contacts.Maui.ViewModel.DepartmentViewModels;
 
 namespace Contacts.Maui.Views.Department;
 
 public partial class CreateDepartmentPage : ContentPage
 {
-	public CreateDepartmentPage(AddDepartmentViewModel addDepartmentviewModel)
+	public CreateDepartmentPage(DepartmentViewModel departmentviewModel)
 	{
 		InitializeComponent();
-		BindingContext = addDepartmentviewModel;
+		BindingContext = departmentviewModel;
     }
 
    

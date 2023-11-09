@@ -13,6 +13,9 @@ namespace Contacts.Maui.ViewModel
         [ObservableProperty]
         private string _name;
 
+        [ObservableProperty]
+        private Department _operatingDepartment = new();
+
         public AddDepartmentViewModel(AppDbContext context)
         {
             _context = context;
@@ -23,15 +26,18 @@ namespace Contacts.Maui.ViewModel
         {
             try
             {
-                if (!string.IsNullOrEmpty(Name))
+                if (OperatingDepartment is null)
+                    return;
+
+                if (OperatingDepartment.Id ==0)
                 {
-                    Department department = new()
-                    {
-                        Name = Name,
-                    };
+                    //Department department = new()
+                    //{
+                    //    Name = Name,
+                    //};
                     //  var response =  await DeptService.CreateDepartment(department); // OLd way without MVVM
 
-                    var response = await _context.CreateAsync(department);
+                    var response = await _context.CreateAsync<Department>(OperatingDepartment);
                     if (response > 0)
                     {
                         await Shell.Current.DisplayAlert("Department Added", "Department Added Successfully", "OK");
@@ -40,8 +46,9 @@ namespace Contacts.Maui.ViewModel
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Error", "Name is required.", "OK");
+                  await _context.UpdateAsync<Department>(OperatingDepartment);
                 }
+                OperatingDepartment = new();
             }
             catch (Exception ex)
             {

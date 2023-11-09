@@ -4,14 +4,20 @@ using Contacts.Maui.ViewModel.DepartmentViewModels;
 namespace Contacts.Maui.Views.Department;
 
 public partial class DepartmentsPage : ContentPage
-{   
-    public DepartmentsPage(GetDepartmentsViewModel getDepartmentListViewModel)
+{
+    private readonly DepartmentViewModel _departmentViewModel;
+    public DepartmentsPage(DepartmentViewModel departmentViewModel)
     {
         InitializeComponent();
-        BindingContext = getDepartmentListViewModel; 
+        BindingContext = departmentViewModel;
+        _departmentViewModel = departmentViewModel;
+    }
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+        await _departmentViewModel.LoadDepartments();
     }
 
-   
     private void ListDepartments_ItemSelected(object sender, SelectionChangedEventArgs e)
     {
         //if (listDepartments.SelectedItem != null)

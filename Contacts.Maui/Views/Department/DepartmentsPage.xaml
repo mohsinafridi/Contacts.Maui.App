@@ -3,14 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Contacts.Maui.Views.Department.DepartmentsPage"
               xmlns:viewmodel ="clr-namespace:Contacts.Maui.ViewModel.DepartmentViewModels"
-              x:DataType="viewmodel:GetDepartmentsViewModel"
+             xmlns:models="clr-namespace:Contacts.Maui.Models"
+              x:DataType="viewmodel:DepartmentViewModel"
              Title="Departments">
 
 
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Department" Command="{Binding SaveDepartmentCommand}"/>
+    </ContentPage.ToolbarItems>-->
+    
     <Grid
      Padding="5"
      RowDefinitions="*, 50"
      ColumnDefinitions="*">
+
+
+        <!--<VerticalStackLayout Grid.RowSpan="2"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             IsVisible="{Binding IsBusy}">
+            <ActivityIndicator IsRunning="True"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"/>
+            <Label Text="{Binding BusyText}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+
+            </Label>
+        </VerticalStackLayout>-->
+
+
 
         <ListView ItemsSource="{Binding Departments}"
         Grid.Row="0"
@@ -24,25 +46,28 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell 
-                 Text="{Binding Name}" 
-                 >
+
+                    <TextCell Text="{Binding Name}">
                         <TextCell.ContextActions>
-                            <MenuItem Text="Delete" 
-                                   IsDestructive="True"                                   
-                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GetDepartmentsViewModel}}, Path=DeleteDepartmentCommand}"
-                                   CommandParameter="{Binding .}"></MenuItem>
+                            <!--<MenuItem Text="Edit"                                      
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DepartmentViewModel}}, Path=SaveDepartmentCommand}"
+                                CommandParameter="{Binding .}">
+                            </MenuItem>-->
+
+                            <MenuItem Text="Delete" IsDestructive="True"                                       
+                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DepartmentViewModel}}, Path=DeleteDepartmentCommand}"
+                                 CommandParameter="{Binding .}">
+                            </MenuItem>
                         </TextCell.ContextActions>
                     </TextCell>
-
                 </DataTemplate>
             </ListView.ItemTemplate>
 
         </ListView>
 
 
-        <VerticalStackLayout  HeightRequest="70"  Spacing="5" Padding="10,20,20,20">
+        <!--<VerticalStackLayout>
             <Button x:Name="BtnAdd" Text="Add" Clicked="BtnAdd_Clicked"></Button>
-        </VerticalStackLayout>
+        </VerticalStackLayout>-->
     </Grid>
 </ContentPage>

@@ -1,5 +1,6 @@
 ﻿using Contacts.Maui.Models;
 using SQLite;
+using System.Data;
 using System.Data.Common;
 using Contact = Contacts.Maui.Models.Contact;
 
@@ -33,50 +34,37 @@ namespace Contacts.Maui.Database
             var table = await GetTableAsync<TTable>();
             return await table.ToListAsync();
         }
+       
 
         public async Task<int> CreateAsync<TEntity>(TEntity entity) where TEntity : class
         {
             return await _dbConnection.InsertAsync(entity);
         }
 
-        public async Task<int> UpdateAsync<TEntity>(TEntity entity) where TEntity : class
+        public async Task<bool> UpdateAsync<TEntity>(TEntity entity) where TEntity : class,new()
         {
-            return await _dbConnection.UpdateAsync(entity);
+            return await _dbConnection.UpdateAsync(entity) > 0;
         }
 
-        public async Task<int> DeleteAsysnc<TEntity>(TEntity entity) where TEntity : class
+        public async Task<bool> DeleteAsysnc<TEntity>(TEntity entity) where TEntity : class, new()
         {
-            return await _dbConnection.DeleteAsync(entity);
+            return await _dbConnection.DeleteAsync(entity) > 0;
         }
-
+        public async Task<bool> DeleteItemByKeyAsync<TTable>(object primaryKey) where TTable : class, new()
+        {
+            await CreateTableIfNotExists<TTable>();
+            return await _dbConnection.DeleteAsync<TTable>(primaryKey) > 0;
+        }
 
         public async Task<int> AddOrUpdateAsync<TEntity>(TEntity entity) where TEntity : class
         {
             return await _dbConnection.InsertOrReplaceAsync(entity);
         }
-        
 
-        public List<T> GetTableRows<T>(string tableName)
+        public async Task<List<Department>> GetAll()
         {
-            
-            object[] obj = new object[] { };
-            TableMapping map = new (Type.GetType(nameSpace + tableName));
-            string query = "SELECT * FROM [" + tableName + "]";
-
-            return _dbConnection.QueryAsync(map, query, obj).Result.Cast<T>().ToList();
-
-        }
-
-        public object GetTableRow(string tableName, string column, string value)
-        {
-
-            object[] obj = new object[] { };
-            TableMapping map = new(Type.GetType(nameSpace + tableName));
-            string query = "SELECT * FROM " + tableName + " WHERE " + column + "='" + value + "'";
-
-            return _dbConnection.QueryAsync(map, query, obj).Result.FirstOrDefault();
-
-        }
+            return await _dbConnection.Table<Department>().ToListAsync();
+        }        
 
         public async  ValueTask DisposeAsync()
         {

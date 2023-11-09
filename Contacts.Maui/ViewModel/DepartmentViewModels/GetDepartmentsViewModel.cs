@@ -10,37 +10,36 @@ namespace Contacts.Maui.ViewModel.DepartmentViewModels
 
     public partial class GetDepartmentsViewModel : ObservableObject
     {
-        private readonly AppDbContext _context;
-        //  NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+        private readonly AppDbContext _context;        
         public GetDepartmentsViewModel(AppDbContext context)
         {
-            // _context = context;
+             _context = context;
             LoadDepartments();
 
         }
 
         [ObservableProperty]
-        string name;
+        private bool _isBusy;
 
-
-        public ObservableCollection<Department> Departments { get; private set; } = new();
 
         [ObservableProperty]
-        private Department _operatingDepartment = new();
+        private string _busyText;
+
+        [ObservableProperty]
+        private ObservableCollection<Department> _departments = new();
+
+     //   [ObservableProperty]
+       // private Department _operatingDepartment = new();
 
         [RelayCommand]
-        public void LoadDepartments()
+        public async Task LoadDepartments()
         {
-            //if (accessType == NetworkAccess.Internet)
-            //{
-            //    cars = await carApiService.GetCars();
-            //}
-
+            
             Departments.Clear();
 
-            //  var departments = _context.GetTableRows<Department>("Department");
-          //  var departments = await _context.GetAllAsync<Department>();
-            var departments = App.Database.GetTableRows<Department>("Department").ToList();
+             var departments = await _context.GetAllAsync<Department>();
+            //  var departments = await _context.GetAllAsync<Department>();
+            // var departments = await App.Database.GetAllAsync<Department>();
 
             if (departments is not null && departments.Any())
             {

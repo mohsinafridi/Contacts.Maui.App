@@ -50,6 +50,13 @@
     Route="StartPage" />-->
 
     <ShellContent
+Title="Departments"
+ContentTemplate="{DataTemplate department:CreateDepartmentPage}"
+Route="CreateDepartmentPage" />
+
+
+
+    <ShellContent
   Title="Departments"
   ContentTemplate="{DataTemplate department:DepartmentsPage}"
   Route="DepartmentsPage" />
