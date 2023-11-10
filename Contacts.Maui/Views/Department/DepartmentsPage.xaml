@@ -9,7 +9,7 @@
 
 
     <!--<ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Department" Command="{Binding SaveDepartmentCommand}"/>
+        <ToolbarItem x:Name="BtnAdd" Text="Add" Clicked="BtnAdd_Clicked"/>
     </ContentPage.ToolbarItems>-->
     
     <Grid
@@ -46,14 +46,8 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-
-                    <TextCell Text="{Binding Name}">
+                    <TextCell Text="{Binding Name}" Detail="{Binding Name}" DetailColor="Red" Command="">
                         <TextCell.ContextActions>
-                            <!--<MenuItem Text="Edit"                                      
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DepartmentViewModel}}, Path=SaveDepartmentCommand}"
-                                CommandParameter="{Binding .}">
-                            </MenuItem>-->
-
                             <MenuItem Text="Delete" IsDestructive="True"                                       
                                  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DepartmentViewModel}}, Path=DeleteDepartmentCommand}"
                                  CommandParameter="{Binding .}">

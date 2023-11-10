@@ -1,7 +1,5 @@
 ﻿using Contacts.Maui.Models;
 using SQLite;
-using System.Data;
-using System.Data.Common;
 using Contact = Contacts.Maui.Models.Contact;
 
 namespace Contacts.Maui.Database
@@ -13,7 +11,7 @@ namespace Contacts.Maui.Database
         // Application Database
         public readonly static string nameSpace = "Contacts.Maui.Database.AppDbContext.";
 
-        public const string DatabaseFilename = "contactdb.db3";
+        public const string DatabaseFilename = "contact-db.db3";
 
         public const SQLiteOpenFlags Flags = SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache;
         public static string DatabasePath => Path.Combine(FileSystem.AppDataDirectory, DatabaseFilename);

@@ -102,13 +102,7 @@ namespace Contacts.Maui.ViewModel.DepartmentViewModels
                 SetOperatingProductCommand.Execute(new());
             }, busyText);
 
-        }
-
-
-
-       
-
-
+        }      
 
         [RelayCommand]
         private async Task DeleteDepartment(Department department)
