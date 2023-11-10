@@ -49,12 +49,6 @@
     ContentTemplate="{DataTemplate start:StartPage}"
     Route="StartPage" />-->
 
-    <ShellContent
-Title="Departments"
-ContentTemplate="{DataTemplate department:CreateDepartmentPage}"
-Route="CreateDepartmentPage" />
-
-
 
     <ShellContent
   Title="Departments"
@@ -72,15 +66,17 @@ Route="CreateDepartmentPage" />
     <Shell.FlyoutFooterTemplate>
         <DataTemplate>
             <Label
+                TextColor="red"
                 x:Name="AppName"
                 Grid.Row="1"
                 Margin="0"
-                FontAttributes="Bold"
-                FontSize="20"
+                FontAttributes="None"
+                FontSize="15"
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="End"
                 Text="@ContactApp Team"
-                TextColor="{StaticResource NavigationBar}"/>
+                Padding="1 1 12 0"
+                />
         </DataTemplate>
     </Shell.FlyoutFooterTemplate>
     

@@ -8,10 +8,10 @@
              Title="Departments">
 
 
-    <!--<ContentPage.ToolbarItems>
+    <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="BtnAdd" Text="Add" Clicked="BtnAdd_Clicked"/>
-    </ContentPage.ToolbarItems>-->
-    
+    </ContentPage.ToolbarItems>
+
     <Grid
      Padding="5"
      RowDefinitions="*, 50"
@@ -45,10 +45,16 @@
         ItemTapped="ListDepartments_ItemTapped">
 
             <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding Name}" DetailColor="Red" Command="">
+                <DataTemplate x:DataType="models:Department">
+                    <TextCell Text="{Binding Name}" Detail="{Binding Name}" DetailColor="Red">
                         <TextCell.ContextActions>
-                            <MenuItem Text="Delete" IsDestructive="True"                                       
+                            <MenuItem Text="Edit" 
+                                   Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DepartmentViewModel}}, Path=SetOperatingProductCommand}"
+                                   CommandParameter="{Binding .}">
+                            </MenuItem>
+
+
+                            <MenuItem Text="Delete" IsDestructive="True"
                                  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DepartmentViewModel}}, Path=DeleteDepartmentCommand}"
                                  CommandParameter="{Binding .}">
                             </MenuItem>
